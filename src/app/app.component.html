@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
+  
+      li {
+        float: left;
+      }
+  
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+  
+      li a:hover {
+        background-color: #04aa6d;
+      }
+  
+      .active {
+        background-color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li><a class="active" href="#upload" routerLink="/upload">Upload</a></li>
+      <li><a href="#details" routerLink="/details">Details</a></li>
+      <li><a href="#people" routerLink="/people">People</a></li>
+      <li><a href="#summary" routerLink="/summary">Summary</a></li>
+    </ul>
+  
+    <div style="text-align: center; font-weight: bolder; font-size: 50px">
+      <router-outlet></router-outlet>
+    </div>
+  </body>
+</html>
