@@ -1,14 +1,12 @@
-<div class="text-center">
+<div class="text-center drop-zone"(fileDropped)="onFileDropped($event)">
   <input class="form-control" type="file" (change)="onChange($event)" />
-  <br />
-  <button (click)="onUpload()" class="btn btn-success">Upload</button>
 </div>
-
+<button pButton pRipple label="upload" icon="pi pi-upload" iconPos="left" (click)="onUpload()" ></button>
+<div class="container" *ngIf="loading">
+  <h3>Loading ...</h3>
+</div>
 <div class="container text-center jumbotron" *ngIf="shortLink">
   <h2>Visit Here</h2>
   <a href="{{ shortLink }}">{{ shortLink }}</a>
 </div>
 
-<div class="container" *ngIf="loading">
-  <h3>Loading ...</h3>
-</div>

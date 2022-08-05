@@ -19,6 +19,10 @@ export class UploadImageComponent {
     this.file = event.target.files[0];
   }
 
+  onFileDropped(event) {
+    this.file = event.target.files[0];
+	}
+
   // OnClick of button Upload
   onUpload() {
     if (this.file) {

@@ -1,1 +1,26 @@
-<p>order-details works!</p>
+<div class="card">
+  <div class="p-grid p-fluid">
+    <div class="p-field p-col-12 p-md-4">
+      <label for="integeronly">Valid Amount</label>
+      <p-inputNumber inputId="integeronly" [(ngModel)]="value1">
+      </p-inputNumber>
+    </div>
+    <div class="p-field p-col-12 p-md-4">
+      <label for="valid-date">Valid Date</label>
+      <p-calendar [(ngModel)]="date4" [minDate]="minDate" [maxDate]="maxDate" inputId="valid-date" [showIcon]="true">
+      </p-calendar>
+    </div>
+    <div class="p-field p-col-12 p-md-4">
+      <label for="min-max">Status</label>
+      <p-multiSelect [options]="cities" [(ngModel)]="selectedCities" optionLabel="name"></p-multiSelect>
+    </div>
+  </div>
+  <div class="p-grid p-fluid">
+    <div class="p-field p-col-12 p-md-4">
+      <input type="text" pInputText [(ngModel)]="value2">
+    </div>
+    <div class="p-field p-col-12 p-md-4">
+      <input type="text" pInputText [(ngModel)]="value3">
+    </div> 
+  </div>
+</div>
