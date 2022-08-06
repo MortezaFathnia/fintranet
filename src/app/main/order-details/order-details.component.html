@@ -1,26 +1,32 @@
 <div class="card">
-  <div class="p-grid p-fluid">
-    <div class="p-field p-col-12 p-md-4">
-      <label for="integeronly">Valid Amount</label>
-      <p-inputNumber inputId="integeronly" [(ngModel)]="value1">
-      </p-inputNumber>
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form.valid, form.value)">
+    <div class="p-grid p-fluid">
+      <div class="p-field p-col-12 p-md-4">
+        <label for="integeronly">Valid Amount</label>
+        <p-inputNumber inputId="integeronly" formControlName="validAmount">
+        </p-inputNumber>
+      </div>
+      <div class="p-field p-col-12 p-md-4">
+        <label for="valid-date">Valid Date</label>
+        <p-calendar formControlName="date" [minDate]="minDate" [maxDate]="maxDate" inputId="valid-date" [showIcon]="true">
+        </p-calendar>
+      </div>
+      <div class="p-field p-col-12 p-md-4">
+        <label for="min-max">Status</label>
+        <p-multiSelect [options]="status" formControlName="selectedStatus" optionLabel="name"></p-multiSelect>
+      </div>
     </div>
-    <div class="p-field p-col-12 p-md-4">
-      <label for="valid-date">Valid Date</label>
-      <p-calendar [(ngModel)]="date4" [minDate]="minDate" [maxDate]="maxDate" inputId="valid-date" [showIcon]="true">
-      </p-calendar>
+    <div class="p-grid p-fluid">
+      <div class="p-field p-col-12 p-md-4">
+        <label for="fund">Source Of Fund</label>
+        <input id="fund" type="text" pInputText formControlName="fund">
+      </div>
     </div>
-    <div class="p-field p-col-12 p-md-4">
-      <label for="min-max">Status</label>
-      <p-multiSelect [options]="cities" [(ngModel)]="selectedCities" optionLabel="name"></p-multiSelect>
+    <div class="button-wrapper">
+      <button pButton pRipple label="submit" icon="pi pi-check" iconPos="left" type="submit"></button>
+      <button class="p-button-success" pButton pRipple label="Next" icon="pi pi-arrow-right" iconPos="left"
+        (click)="nextStep()"></button>
     </div>
-  </div>
-  <div class="p-grid p-fluid">
-    <div class="p-field p-col-12 p-md-4">
-      <input type="text" pInputText [(ngModel)]="value2">
-    </div>
-    <div class="p-field p-col-12 p-md-4">
-      <input type="text" pInputText [(ngModel)]="value3">
-    </div> 
-  </div>
+  </form>
+  
 </div>

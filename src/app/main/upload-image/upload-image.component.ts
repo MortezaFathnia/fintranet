@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
+import { upload } from '../+state/wizard.actions';
 import { UploadService } from '../../services/upload.service';
 @Component({
   selector: 'app-upload-image',
@@ -6,13 +12,22 @@ import { UploadService } from '../../services/upload.service';
   styleUrls: ['./upload-image.component.scss']
 })
 export class UploadImageComponent {
-
-	shortLink: string = ''; // Variable to store shortLink from api response
+  image$: Observable<object>;
+  shortLink: string = ''; // Variable to store shortLink from api response
   loading: boolean = false; // Flag variable
   file: File = null; // Variable to store file to Upload
-
+  private ngDestroy$ = new Subject();
   // Inject service
-  constructor(private fileUploadService: UploadService) {}
+  constructor(
+    private fileUploadService: UploadService,
+    private _router: Router,
+    private store: Store<{ wizard: object }>
+  ) {
+    store.select('wizard').pipe(takeUntil(this.ngDestroy$))
+      .subscribe((state: any) => {
+        console.log(state.image)
+      });
+  }
 
   // On file Select
   onChange(event) {
@@ -21,7 +36,7 @@ export class UploadImageComponent {
 
   onFileDropped(event) {
     this.file = event.target.files[0];
-	}
+  }
 
   // OnClick of button Upload
   onUpload() {
@@ -35,6 +50,13 @@ export class UploadImageComponent {
           this.loading = false; // Flag variable
         }
       });
+    }
+  }
+
+  updateState() {
+    if (this.shortLink) {
+      this.store.dispatch(upload({ image: { name: this.file.name } }));
+      this._router.navigate(['details'])
     }
   }
 }

@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-interface City {
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+
+import { setDetails } from '../+state/wizard.actions';
+
+interface Status {
   name: string,
-  code: string
+  code: number
 }
 @Component({
   selector: 'app-order-details',
@@ -9,42 +14,58 @@ interface City {
   styleUrls: ['./order-details.component.scss']
 })
 export class OrderDetailsComponent implements OnInit {
-  value1: number;
 
-  value2: string;
+  form: FormGroup;
 
-  value3: string;
+  validAmount: number;
 
-  date4: Date;
+  date: Date;
 
   minDate: Date;
 
   maxDate: Date;
 
-  cities: City[];
+  fund: string;
 
-  selectedCities: City[];
+  status: Status[];
 
-  constructor() { }
+  selectedStatus: Status[];
+
+  constructor(
+    formBuilder: FormBuilder,
+    private store: Store<{ wizard: object }>
+  ) {
+    this.form = formBuilder.group({
+      validAmount: [null, [Validators.required, Validators.pattern("^[0-9]*$")]],
+      date: [null, Validators.required],
+      selectedStatus: [null, Validators.required],
+      fund: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]]
+    });
+  }
 
   ngOnInit(): void {
     let today = new Date();
     this.minDate = new Date();
-    let month = today.getMonth();
-    let year = today.getFullYear();
-    let prevMonth = (month === 0) ? 11 : month - 1;
-    let prevYear = (prevMonth === 11) ? year - 1 : year;
-    this.minDate.setMonth(prevMonth);
-    this.minDate.setFullYear(prevYear);
+    let prev5Days = (today.getDay()) - 5;
+    this.minDate.setDate(prev5Days);
     this.maxDate = new Date();
 
-    this.cities = [
-      { name: 'New York', code: 'NY' },
-      { name: 'Rome', code: 'RM' },
-      { name: 'London', code: 'LDN' },
-      { name: 'Istanbul', code: 'IST' },
-      { name: 'Paris', code: 'PRS' }
+    this.status = [
+      { name: 'active', code: 2 },
+      { name: 'doing', code: 1 },
+      { name: 'off', code: 0 },
+      { name: 'disabled', code: -1 }
     ];
   }
 
+  onSubmit(valid: boolean, value: any): void {
+    console.log(valid, value);
+    if (valid) {
+      this.store.dispatch(setDetails({ details: value }));
+    }
+  }
+
+  nextStep() {
+
+  }
 }
