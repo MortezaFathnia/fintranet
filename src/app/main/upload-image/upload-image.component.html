@@ -4,6 +4,7 @@
     <div class="text-center drop-zone" (fileDropped)="onFileDropped($event)">
       <input class="form-control" type="file" (change)="onChange($event)" />
     </div>
+    <h5 class="error">{{error}}</h5>
     <div class="container" *ngIf="loading">
       <h3>Loading ...</h3>
     </div>
@@ -14,7 +15,7 @@
   </div>
 </div>
 <div class="button-wrapper">
-  <button pButton pRipple label="upload" icon="pi pi-upload" iconPos="left" (click)="onUpload()"></button>
+  <button pButton pRipple label="upload" [disabled]="shortLink" icon="pi pi-upload" iconPos="left" (click)="onUpload()"></button>
   <button class="p-button-success" [disabled]="!shortLink" pButton pRipple label="Next" icon="pi pi-arrow-right"
     iconPos="left" (click)="updateState()"></button>
 </div>

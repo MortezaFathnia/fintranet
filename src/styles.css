@@ -16,7 +16,7 @@ body {
   padding: 2rem;
   border-radius: 10px;
   margin-bottom: 2rem;
-  height: 70vh;
+  min-height: 70vh;
 }
 
 .layout-wrapper .content-section {
@@ -30,4 +30,12 @@ body {
 
 .button-wrapper button {
   margin-right: 1rem;
+}
+
+.mt-1 {
+  margin-top: 1rem;
+}
+
+.error {
+  color: #EF4444;
 }

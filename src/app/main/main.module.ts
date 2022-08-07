@@ -14,6 +14,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { RatingModule } from 'primeng/rating';
 import { ToolbarModule } from 'primeng/toolbar';
 import { FileUploadModule } from 'primeng/fileupload';
+import { FieldsetModule } from 'primeng/fieldset';
 import { StoreModule } from '@ngrx/store';
 
 import { MainRoutingModule } from './main-routing.module';
@@ -23,8 +24,9 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
 import { SelectPeopleComponent } from './select-people/select-people.component';
 import { CalendarModule } from 'primeng/calendar';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { ProductService } from '../services/product.service';
+import { PeoplesService } from '../services/peoples.service';
 import { wizardReducer } from './+state/wizard.reducer';
+import { UploadService } from '../services/upload.service';
 
 
 @NgModule({
@@ -54,8 +56,9 @@ import { wizardReducer } from './+state/wizard.reducer';
     FileUploadModule,
     CalendarModule,
     MultiSelectModule,
+    FieldsetModule,
     StoreModule.forRoot({ wizard: wizardReducer }),
   ],
-  providers: [ProductService],
+  providers: [PeoplesService, UploadService],
 })
 export class MainModule { }

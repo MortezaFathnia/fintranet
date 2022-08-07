@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../../services/product.service';
+import { PeoplesService } from '../../services/peoples.service';
 
-import { Product } from 'src/app/interfaces/product';
+import { People } from 'src/app/interfaces/people';
+import { Store } from '@ngrx/store';
+import { setSelectedPeoples } from '../+state/wizard.actions';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-select-people',
   templateUrl: './select-people.component.html',
@@ -9,16 +13,31 @@ import { Product } from 'src/app/interfaces/product';
 })
 export class SelectPeopleComponent implements OnInit {
 
-  products: Product[];
+  peoples: People[];
 
-  product: Product;
+  people: People;
 
-  selectedProducts: Product[];
+  selectedPeoples: People[];
 
-  constructor(private productService: ProductService) { }
+  submitted=false;
 
-  ngOnInit(): void {
-    this.productService.getProducts().then(data => this.products = data);
+  constructor(
+    private peoplesService: PeoplesService,
+    private _router: Router,
+    private store: Store<{ wizard: object }>) { 
+
   }
 
+  ngOnInit(): void {
+    this.peoplesService.getPeoples().then(data => this.peoples = data);
+  }
+
+  selectPeople(){
+    this.submitted=true;
+    this.store.dispatch(setSelectedPeoples({ peoples: this.selectedPeoples }));
+  }
+
+  nextStep() {
+    this._router.navigate(['summary'])
+  }
 }

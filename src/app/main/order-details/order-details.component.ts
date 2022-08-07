@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { setDetails } from '../+state/wizard.actions';
@@ -17,22 +18,21 @@ export class OrderDetailsComponent implements OnInit {
 
   form: FormGroup;
 
-  validAmount: number;
-
   date: Date;
 
   minDate: Date;
 
   maxDate: Date;
 
-  fund: string;
-
   status: Status[];
+
+  submitted = false;
 
   selectedStatus: Status[];
 
   constructor(
     formBuilder: FormBuilder,
+    private _router: Router,
     private store: Store<{ wizard: object }>
   ) {
     this.form = formBuilder.group({
@@ -51,21 +51,21 @@ export class OrderDetailsComponent implements OnInit {
     this.maxDate = new Date();
 
     this.status = [
-      { name: 'active', code: 2 },
-      { name: 'doing', code: 1 },
-      { name: 'off', code: 0 },
-      { name: 'disabled', code: -1 }
+      { name: 'OUTOFSTOCK', code: 2 },
+      { name: 'INSTOCK', code: 1 },
+      { name: 'LOWSTOCK', code: 0 },
+      { name: 'Free', code: -1 }
     ];
   }
 
   onSubmit(valid: boolean, value: any): void {
-    console.log(valid, value);
     if (valid) {
       this.store.dispatch(setDetails({ details: value }));
+      this.submitted = true;
     }
   }
 
   nextStep() {
-
+    this._router.navigate(['people'])
   }
 }

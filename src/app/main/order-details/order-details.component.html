@@ -1,4 +1,5 @@
 <div class="card">
+  <h5>Details</h5>
   <form [formGroup]="form" (ngSubmit)="onSubmit(form.valid, form.value)">
     <div class="p-grid p-fluid">
       <div class="p-field p-col-12 p-md-4">
@@ -23,8 +24,8 @@
       </div>
     </div>
     <div class="button-wrapper">
-      <button pButton pRipple label="submit" icon="pi pi-check" iconPos="left" type="submit"></button>
-      <button class="p-button-success" pButton pRipple label="Next" icon="pi pi-arrow-right" iconPos="left"
+      <button pButton pRipple label="submit" [disabled]="submitted" icon="pi pi-check" iconPos="left" type="submit"></button>
+      <button class="p-button-success" [disabled]="!submitted" pButton pRipple label="Next" icon="pi pi-arrow-right" iconPos="left"
         (click)="nextStep()"></button>
     </div>
   </form>
