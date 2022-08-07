@@ -27,6 +27,7 @@ export class UploadImageComponent {
 
   // On file Select
   onChange(event) {
+    this.error='';
     this.file = event.target.files[0];
     this.validateFile();
   }

@@ -54,7 +54,7 @@ export class OrderDetailsComponent implements OnInit {
       { name: 'OUTOFSTOCK', code: 2 },
       { name: 'INSTOCK', code: 1 },
       { name: 'LOWSTOCK', code: 0 },
-      { name: 'Free', code: -1 }
+      { name: 'FREE', code: -1 }
     ];
   }
 

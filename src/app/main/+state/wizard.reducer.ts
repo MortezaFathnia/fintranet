@@ -1,11 +1,13 @@
-import { createFeatureSelector, createReducer, on } from '@ngrx/store';
-import { Action } from 'rxjs/internal/scheduler/Action';
+import { createFeatureSelector } from '@ngrx/store';
+import { Details } from 'src/app/interfaces/details';
+import { Image } from 'src/app/interfaces/image';
+import { People } from 'src/app/interfaces/people';
 import { upload, setDetails, setSelectedPeoples } from './wizard.actions';
 
 export interface WizardState {
-  image: {},
-  details: {},
-  peoples: []
+  image: Image,
+  details: Details,
+  peoples: People[]
 }
 
 export const initialState = {

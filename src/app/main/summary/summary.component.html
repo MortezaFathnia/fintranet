@@ -1,76 +1,88 @@
 <div class="card">
-  <h2>Summary</h2>
-  <div class="fielset-wrapper">
-    <p-fieldset legend="Image" [toggleable]="true">
-      <div *ngIf="(image | json) !== '{}'" class="p-grid p-fluid">
-        <div class="p-field p-col-12 p-md-3">
-          <h5>Name:</h5>
-          <p>{{image.name}}</p>
-        </div>
-        <div class="p-field p-col-12 p-md-3">
-          <h5>Size:</h5>
-          <p>{{image.size}}</p>
-        </div>
-        <div class="p-field p-col-12 p-md-3">
-          <h5>Type:</h5>
-          <p>{{image.type}}</p>
-        </div>
-      </div>
-      <div *ngIf="(image | json) === '{}'">
-        <h5>Image doesn't exist!</h5>
-      </div>
-    </p-fieldset>
-  </div>
-  <div class="fielset-wrapper">
-    <p-fieldset legend="Details" [toggleable]="true">
-      <div *ngIf="(details | json) !== '{}'" class="p-grid p-fluid">
-        <div class="p-field p-col-12 p-md-3">
-          <h5>Name:</h5>
-          <p>{{details.validAmount}}</p>
-        </div>
-        <div class="p-field p-col-12 p-md-3">
-          <h5>Date:</h5>
-          <p>{{details.date}}</p>
-        </div>
-        <div class="p-field p-col-12 p-md-3">
-          <h5>Status:</h5>
-          <p *ngFor="let status of details.selectedStatus">{{status?.name}}</p>
-        </div>
-        <div class="p-field p-col-12 p-md-3">
-          <h5>Fund:</h5>
-          <p>{{details.fund}}</p>
-        </div>
-      </div>
-      <div *ngIf="(details | json) === '{}'">
-        <h5>Details doesn't exist!</h5>
-      </div>
-    </p-fieldset>
-  </div>
-  <div class="fielset-wrapper">
-    <p-fieldset legend="Peoples" [toggleable]="true">
-      <div *ngIf="peoples.length>0">
-        <div class="p-grid p-fluid" *ngFor="let people of peoples">
+  <div *ngIf="!completed">
+    <h2>Summary</h2>
+    <div class="fielset-wrapper">
+      <p-fieldset legend="Image" [toggleable]="true">
+        <div *ngIf="(image | json) !== '{}'" class="p-grid p-fluid">
           <div class="p-field p-col-12 p-md-3">
             <h5>Name:</h5>
-            <p>{{people.name}}</p>
+            <p>{{image.name}}</p>
           </div>
           <div class="p-field p-col-12 p-md-3">
-            <h5>Email:</h5>
-            <p>{{people.email}}</p>
+            <h5>Size:</h5>
+            <p>{{image.size}}</p>
           </div>
           <div class="p-field p-col-12 p-md-3">
-            <h5>City:</h5>
-            <p>{{people.city}}</p>
-          </div>
-          <div class="p-field p-col-12 p-md-3">
-            <h5>Mac:</h5>
-            <p>{{people.mac}}</p>
+            <h5>Type:</h5>
+            <p>{{image.type}}</p>
           </div>
         </div>
-      </div>
-      <div *ngIf="!(peoples.length>0)">
-        <h5>No peoples selected!</h5>
-      </div>
-    </p-fieldset>
+        <div *ngIf="(image | json) === '{}'">
+          <h5>Image doesn't exist!</h5>
+        </div>
+      </p-fieldset>
+    </div>
+    <div class="fielset-wrapper">
+      <p-fieldset legend="Details" [toggleable]="true">
+        <div *ngIf="(details | json) !== '{}'" class="p-grid p-fluid">
+          <div class="p-field p-col-12 p-md-3">
+            <h5>Name:</h5>
+            <p>{{details.validAmount}}</p>
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <h5>Date:</h5>
+            <p>{{details.date}}</p>
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <h5>Status:</h5>
+            <p *ngFor="let status of details.selectedStatus">{{status?.name}}</p>
+          </div>
+          <div class="p-field p-col-12 p-md-3">
+            <h5>Fund:</h5>
+            <p>{{details.fund}}</p>
+          </div>
+        </div>
+        <div *ngIf="(details | json) === '{}'">
+          <h5>Details doesn't exist!</h5>
+        </div>
+      </p-fieldset>
+    </div>
+    <div class="fielset-wrapper">
+      <p-fieldset legend="Peoples" [toggleable]="true">
+        <div *ngIf="peoples.length>0">
+          <div class="p-grid p-fluid" *ngFor="let people of peoples">
+            <div class="p-field p-col-12 p-md-3">
+              <h5>Name:</h5>
+              <p>{{people.name}}</p>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+              <h5>Email:</h5>
+              <p>{{people.email}}</p>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+              <h5>City:</h5>
+              <p>{{people.city}}</p>
+            </div>
+            <div class="p-field p-col-12 p-md-3">
+              <h5>Mac:</h5>
+              <p>{{people.mac}}</p>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!(peoples.length>0)">
+          <h5>No peoples selected!</h5>
+        </div>
+      </p-fieldset>
+    </div>
+    <div class="button-wrapper">
+      <button class="p-button-success" pButton pRipple label="Complete" icon="pi pi-check-square" iconPos="left"
+        (click)="completeWizard()"></button>
+    </div>
+  </div>
+  <div *ngIf="completed">
+    <div class="complete-wrapper">
+      <h2 class="text-blue">Congratulation!</h2>
+      <h5>Thanks for your time</h5>
+    </div>
   </div>
 </div>

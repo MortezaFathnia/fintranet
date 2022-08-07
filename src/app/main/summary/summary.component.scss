@@ -1,3 +1,10 @@
 .fielset-wrapper{
   margin-bottom: 2rem;
 }
+.complete-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 60vh;
+}
